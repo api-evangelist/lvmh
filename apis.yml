@@ -1,18 +1,49 @@
 aid: lvmh
-url: https://raw.githubusercontent.com/api-evangelist/lvmh/refs/heads/main/apis.yml
 name: LVMH
-type: Index
+description: >-
+  LVMH Moët Hennessy Louis Vuitton is the world's largest luxury goods
+  conglomerate, headquartered in Paris and operating over 75 prestigious
+  brands. Its portfolio spans fashion and leather goods (Louis Vuitton,
+  Christian Dior, Fendi, Loewe, Celine), wines and spirits (Moët & Chandon,
+  Hennessy, Veuve Clicquot), perfumes and cosmetics (Givenchy, Guerlain), watches
+  and jewelry (Tiffany & Co., Bulgari, TAG Heuer), and selective retailing
+  (Sephora, DFS). LVMH does not currently publish a public developer API or
+  developer portal at the group level; technical and partner integrations are
+  handled brand-by-brand and through closed innovation partnerships such as
+  the Aura Blockchain Consortium.
+kind: company
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - Luxury
+  - Cosmetics
   - Fashion
+  - Jewelry
+  - Luxury
   - Retail
-  - Consumer Products
-description: 'The world''s largest luxury goods conglomerate headquartered in Paris, operating over 75 prestigious brands. Portfolio includes Louis Vuitton, Christian Dior, Moët & Chandon, Hennessy, Sephora, and Tiffany & Co. spanning fashion, wine, cosmetics, and jewelry.'
+  - Wine and Spirits
+url: https://raw.githubusercontent.com/api-evangelist/lvmh/refs/heads/main/apis.yml
 created: '2026-05-05'
-modified: '2026-05-05'
+modified: '2026-05-16'
 specificationVersion: '0.19'
 apis: []
 common:
   - type: Website
     url: https://www.lvmh.com/
+  - type: AboutUs
+    url: https://www.lvmh.com/en/our-group
+  - type: Brands
+    url: https://www.lvmh.com/en/our-maisons
+  - type: InvestorRelations
+    url: https://www.lvmh.com/en/investors
+  - type: News
+    url: https://www.lvmh.com/en/news-documents
+  - type: Sustainability
+    url: https://www.lvmh.com/en/our-commitments
+  - type: Careers
+    url: https://www.lvmhcareers.com/
+  - type: Innovation
+    url: https://www.lvmh.com/en/news-documents/lvmh-innovation
+  - type: BlockchainConsortium
+    url: https://auraconsortium.com/
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

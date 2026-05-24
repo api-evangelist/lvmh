@@ -48,6 +48,8 @@ common:
     url: https://www.lvmh.com/en/news-documents/lvmh-innovation
   - type: BlockchainConsortium
     url: https://auraconsortium.com/
+  - type: LLMsTxt
+    url: https://www.lvmh.com/llms.txt
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

@@ -1,0 +1,1240 @@
+# LVMH Conceptual GraphQL Schema
+# Represents the luxury goods ecosystem of LVMH Moet Hennessy Louis Vuitton
+# This is a conceptual schema; LVMH does not publish a public group-level API.
+
+scalar DateTime
+scalar URL
+scalar JSON
+scalar Currency
+
+# ─────────────────────────────────────────
+# Brand Types
+# ─────────────────────────────────────────
+
+interface Brand {
+  id: ID!
+  name: String!
+  slug: String!
+  foundedYear: Int
+  headquartersCity: String
+  headquartersCountry: String
+  website: URL
+  logoUrl: URL
+  description: String
+  segment: BrandSegment!
+}
+
+enum BrandSegment {
+  FASHION_LEATHER_GOODS
+  WINES_SPIRITS
+  PERFUMES_COSMETICS
+  WATCHES_JEWELRY
+  SELECTIVE_RETAILING
+  OTHER
+}
+
+type LVMHBrand implements Brand {
+  id: ID!
+  name: String!
+  slug: String!
+  foundedYear: Int
+  headquartersCity: String
+  headquartersCountry: String
+  website: URL
+  logoUrl: URL
+  description: String
+  segment: BrandSegment!
+  lvmhAcquisitionYear: Int
+  isIconicMaison: Boolean!
+  products(first: Int, after: String): ProductConnection!
+  stores(country: String, city: String): [Store!]!
+  collections: [ProductCollection!]!
+}
+
+type LouisVuitton implements Brand {
+  id: ID!
+  name: String!
+  slug: String!
+  foundedYear: Int
+  headquartersCity: String
+  headquartersCountry: String
+  website: URL
+  logoUrl: URL
+  description: String
+  segment: BrandSegment!
+  monogramLine: [Product!]!
+  leatherGoods: [Leather!]!
+  readyToWear: [Fashion!]!
+  travelGoods: [Accessories!]!
+  collaborations: [SeasonalCollection!]!
+}
+
+type ChristianDior implements Brand {
+  id: ID!
+  name: String!
+  slug: String!
+  foundedYear: Int
+  headquartersCity: String
+  headquartersCountry: String
+  website: URL
+  logoUrl: URL
+  description: String
+  segment: BrandSegment!
+  hauteCouture: [Fashion!]!
+  readyToWear: [Fashion!]!
+  accessories: [Accessories!]!
+  perfumes: [Perfume!]!
+  beautyLine: [Product!]!
+}
+
+type Givenchy implements Brand {
+  id: ID!
+  name: String!
+  slug: String!
+  foundedYear: Int
+  headquartersCity: String
+  headquartersCountry: String
+  website: URL
+  logoUrl: URL
+  description: String
+  segment: BrandSegment!
+  readyToWear: [Fashion!]!
+  accessories: [Accessories!]!
+  perfumes: [Perfume!]!
+}
+
+type Celine implements Brand {
+  id: ID!
+  name: String!
+  slug: String!
+  foundedYear: Int
+  headquartersCity: String
+  headquartersCountry: String
+  website: URL
+  logoUrl: URL
+  description: String
+  segment: BrandSegment!
+  leatherGoods: [Leather!]!
+  readyToWear: [Fashion!]!
+}
+
+type Loewe implements Brand {
+  id: ID!
+  name: String!
+  slug: String!
+  foundedYear: Int
+  headquartersCity: String
+  headquartersCountry: String
+  website: URL
+  logoUrl: URL
+  description: String
+  segment: BrandSegment!
+  leatherGoods: [Leather!]!
+  craft: [Product!]!
+}
+
+type MarcJacobs implements Brand {
+  id: ID!
+  name: String!
+  slug: String!
+  foundedYear: Int
+  headquartersCity: String
+  headquartersCountry: String
+  website: URL
+  logoUrl: URL
+  description: String
+  segment: BrandSegment!
+  bags: [Accessories!]!
+  readyToWear: [Fashion!]!
+}
+
+type Fendi implements Brand {
+  id: ID!
+  name: String!
+  slug: String!
+  foundedYear: Int
+  headquartersCity: String
+  headquartersCountry: String
+  website: URL
+  logoUrl: URL
+  description: String
+  segment: BrandSegment!
+  fur: [Fashion!]!
+  leatherGoods: [Leather!]!
+  accessories: [Accessories!]!
+}
+
+type Bulgari implements Brand {
+  id: ID!
+  name: String!
+  slug: String!
+  foundedYear: Int
+  headquartersCity: String
+  headquartersCountry: String
+  website: URL
+  logoUrl: URL
+  description: String
+  segment: BrandSegment!
+  jewelry: [Jewelry!]!
+  watches: [Watches!]!
+  hotels: [Store!]!
+}
+
+type BulgariCollection {
+  id: ID!
+  name: String!
+  description: String
+  jewelry: [Jewelry!]!
+  year: Int
+}
+
+type Tiffany implements Brand {
+  id: ID!
+  name: String!
+  slug: String!
+  foundedYear: Int
+  headquartersCity: String
+  headquartersCountry: String
+  website: URL
+  logoUrl: URL
+  description: String
+  segment: BrandSegment!
+  jewelry: [Jewelry!]!
+  engagementRings: [Jewelry!]!
+  gifts: [Product!]!
+  homeAndAccessories: [Accessories!]!
+}
+
+type TagHeuer implements Brand {
+  id: ID!
+  name: String!
+  slug: String!
+  foundedYear: Int
+  headquartersCity: String
+  headquartersCountry: String
+  website: URL
+  logoUrl: URL
+  description: String
+  segment: BrandSegment!
+  sportWatches: [Watches!]!
+  chronographs: [Watches!]!
+  smartWatches: [Watches!]!
+}
+
+type Zenith implements Brand {
+  id: ID!
+  name: String!
+  slug: String!
+  foundedYear: Int
+  headquartersCity: String
+  headquartersCountry: String
+  website: URL
+  logoUrl: URL
+  description: String
+  segment: BrandSegment!
+  mechanicalWatches: [Watches!]!
+  elPrimeroLine: [Watches!]!
+}
+
+type Hublot implements Brand {
+  id: ID!
+  name: String!
+  slug: String!
+  foundedYear: Int
+  headquartersCity: String
+  headquartersCountry: String
+  website: URL
+  logoUrl: URL
+  description: String
+  segment: BrandSegment!
+  bigBangLine: [Watches!]!
+  classicFusion: [Watches!]!
+  limitedEditions: [LimitedEdition!]!
+}
+
+type DomPerignon implements Brand {
+  id: ID!
+  name: String!
+  slug: String!
+  foundedYear: Int
+  headquartersCity: String
+  headquartersCountry: String
+  website: URL
+  logoUrl: URL
+  description: String
+  segment: BrandSegment!
+  vintages: [Champagne!]!
+  prestige: [Champagne!]!
+}
+
+type Moet implements Brand {
+  id: ID!
+  name: String!
+  slug: String!
+  foundedYear: Int
+  headquartersCity: String
+  headquartersCountry: String
+  website: URL
+  logoUrl: URL
+  description: String
+  segment: BrandSegment!
+  brut: [Champagne!]!
+  rose: [Champagne!]!
+  iceImperial: [Champagne!]!
+}
+
+type Chandon implements Brand {
+  id: ID!
+  name: String!
+  slug: String!
+  foundedYear: Int
+  headquartersCity: String
+  headquartersCountry: String
+  website: URL
+  logoUrl: URL
+  description: String
+  segment: BrandSegment!
+  sparklingWines: [Wine!]!
+  gardens: [Store!]!
+}
+
+type Hennessy implements Brand {
+  id: ID!
+  name: String!
+  slug: String!
+  foundedYear: Int
+  headquartersCity: String
+  headquartersCountry: String
+  website: URL
+  logoUrl: URL
+  description: String
+  segment: BrandSegment!
+  cognacs: [Cognac!]!
+  xo: Cognac
+  vs: Cognac
+  vsop: Cognac
+  limitedEditions: [LimitedEdition!]!
+}
+
+# ─────────────────────────────────────────
+# Product Types
+# ─────────────────────────────────────────
+
+interface Product {
+  id: ID!
+  sku: String!
+  name: String!
+  description: String
+  brand: LVMHBrand!
+  category: ProductCategory!
+  images: [ProductImage!]!
+  price: Price!
+  availability: Availability!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type ProductDetails implements Product {
+  id: ID!
+  sku: String!
+  name: String!
+  description: String
+  brand: LVMHBrand!
+  category: ProductCategory!
+  images: [ProductImage!]!
+  price: Price!
+  availability: Availability!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  materials: [String!]
+  dimensions: String
+  weight: String
+  colorOptions: [String!]
+  careInstructions: String
+  madeIn: String
+  collection: ProductCollection
+  relatedProducts: [Product!]!
+  skus: [SKU!]!
+}
+
+type ProductCategory {
+  id: ID!
+  name: String!
+  slug: String!
+  parent: ProductCategory
+  children: [ProductCategory!]!
+  segment: BrandSegment!
+  description: String
+  products(first: Int, after: String): ProductConnection!
+}
+
+type ProductCollection {
+  id: ID!
+  name: String!
+  slug: String!
+  brand: LVMHBrand!
+  season: String
+  year: Int
+  description: String
+  launchDate: DateTime
+  products: [Product!]!
+  lookbookUrl: URL
+}
+
+type SeasonalCollection {
+  id: ID!
+  name: String!
+  brand: LVMHBrand!
+  season: String!
+  year: Int!
+  description: String
+  products: [Product!]!
+  campaignImages: [ProductImage!]!
+  presenterName: String
+}
+
+type LimitedEdition {
+  id: ID!
+  name: String!
+  brand: LVMHBrand!
+  totalUnits: Int
+  releaseDate: DateTime
+  description: String
+  products: [Product!]!
+  collectorValue: LuxuryPrice
+  isSoldOut: Boolean!
+}
+
+type Accessories implements Product {
+  id: ID!
+  sku: String!
+  name: String!
+  description: String
+  brand: LVMHBrand!
+  category: ProductCategory!
+  images: [ProductImage!]!
+  price: Price!
+  availability: Availability!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  accessoryType: AccessoryType!
+  material: String
+  hardware: String
+  dimensions: String
+  skus: [SKU!]!
+}
+
+enum AccessoryType {
+  BAG
+  BELT
+  SCARF
+  SUNGLASSES
+  SHOES
+  SMALL_LEATHER_GOODS
+  OTHER
+}
+
+type Leather implements Product {
+  id: ID!
+  sku: String!
+  name: String!
+  description: String
+  brand: LVMHBrand!
+  category: ProductCategory!
+  images: [ProductImage!]!
+  price: Price!
+  availability: Availability!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  leatherType: String!
+  tannage: String
+  finish: String
+  hardware: String
+  capacity: String
+  skus: [SKU!]!
+}
+
+type Watches implements Product {
+  id: ID!
+  sku: String!
+  name: String!
+  description: String
+  brand: LVMHBrand!
+  category: ProductCategory!
+  images: [ProductImage!]!
+  price: Price!
+  availability: Availability!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  movement: String!
+  caseMaterial: String!
+  caseDiameter: Float
+  waterResistance: String
+  powerReserve: String
+  braceletMaterial: String
+  dialColor: String
+  complications: [String!]
+  warrantyYears: Int
+  skus: [SKU!]!
+}
+
+type Jewelry implements Product {
+  id: ID!
+  sku: String!
+  name: String!
+  description: String
+  brand: LVMHBrand!
+  category: ProductCategory!
+  images: [ProductImage!]!
+  price: Price!
+  availability: Availability!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  metalType: String!
+  stones: [JewelryStone!]
+  totalCaratWeight: Float
+  ringSize: String
+  chainLength: String
+  jewelryType: JewelryType!
+  skus: [SKU!]!
+}
+
+enum JewelryType {
+  RING
+  NECKLACE
+  BRACELET
+  EARRINGS
+  BROOCH
+  PENDANT
+  OTHER
+}
+
+type JewelryStone {
+  stoneType: String!
+  caratWeight: Float
+  color: String
+  clarity: String
+  cut: String
+  origin: String
+}
+
+type Fashion implements Product {
+  id: ID!
+  sku: String!
+  name: String!
+  description: String
+  brand: LVMHBrand!
+  category: ProductCategory!
+  images: [ProductImage!]!
+  price: Price!
+  availability: Availability!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  gender: Gender!
+  garmentType: String!
+  fabric: String
+  sizing: SizingGuide
+  collection: SeasonalCollection
+  skus: [SKU!]!
+}
+
+enum Gender {
+  WOMENS
+  MENS
+  UNISEX
+  CHILDRENS
+}
+
+type SizingGuide {
+  sizeChart: JSON
+  fitDescription: String
+  modelHeight: String
+  modelWearing: String
+}
+
+type Perfume implements Product {
+  id: ID!
+  sku: String!
+  name: String!
+  description: String
+  brand: LVMHBrand!
+  category: ProductCategory!
+  images: [ProductImage!]!
+  price: Price!
+  availability: Availability!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  concentration: FragranceConcentration!
+  topNotes: [String!]
+  heartNotes: [String!]
+  baseNotes: [String!]
+  perfumer: String
+  launchYear: Int
+  sizesMl: [Int!]!
+  skus: [SKU!]!
+}
+
+enum FragranceConcentration {
+  PARFUM
+  EAU_DE_PARFUM
+  EAU_DE_TOILETTE
+  EAU_DE_COLOGNE
+  EAU_FRAICHE
+}
+
+type Champagne implements Product {
+  id: ID!
+  sku: String!
+  name: String!
+  description: String
+  brand: LVMHBrand!
+  category: ProductCategory!
+  images: [ProductImage!]!
+  price: Price!
+  availability: Availability!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  vintage: Int
+  dosage: String
+  grapVarieties: [String!]!
+  region: String!
+  alcoholContent: Float
+  agingMonths: Int
+  bottleSizes: [String!]!
+  awards: [String!]
+  skus: [SKU!]!
+}
+
+type Cognac implements Product {
+  id: ID!
+  sku: String!
+  name: String!
+  description: String
+  brand: LVMHBrand!
+  category: ProductCategory!
+  images: [ProductImage!]!
+  price: Price!
+  availability: Availability!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  classification: CognacClassification!
+  ageStatement: String
+  grapeVariety: String!
+  region: String!
+  alcoholContent: Float!
+  bottleSizes: [String!]!
+  nosing: String
+  palate: String
+  finish: String
+  skus: [SKU!]!
+}
+
+enum CognacClassification {
+  VS
+  VSOP
+  XO
+  NAPOLEON
+  EXTRA
+  HORS_DAGE
+}
+
+type Wine implements Product {
+  id: ID!
+  sku: String!
+  name: String!
+  description: String
+  brand: LVMHBrand!
+  category: ProductCategory!
+  images: [ProductImage!]!
+  price: Price!
+  availability: Availability!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  vintage: Int
+  wineType: WineType!
+  appellation: String
+  grapVarieties: [String!]!
+  alcoholContent: Float
+  bottleSizes: [String!]!
+  servingTemperature: String
+  agingPotential: String
+  skus: [SKU!]!
+}
+
+enum WineType {
+  RED
+  WHITE
+  ROSE
+  SPARKLING
+  DESSERT
+  FORTIFIED
+}
+
+# ─────────────────────────────────────────
+# Product Media and SKU
+# ─────────────────────────────────────────
+
+type ProductImage {
+  id: ID!
+  url: URL!
+  altText: String
+  width: Int
+  height: Int
+  isPrimary: Boolean!
+  viewType: ImageViewType!
+}
+
+enum ImageViewType {
+  FRONT
+  BACK
+  SIDE
+  DETAIL
+  LIFESTYLE
+  FLAT_LAY
+  ON_MODEL
+}
+
+type SKU {
+  id: ID!
+  sku: String!
+  product: ProductDetails!
+  color: String
+  size: String
+  material: String
+  price: Price!
+  availability: Availability!
+  barcode: String
+  weight: Float
+}
+
+# ─────────────────────────────────────────
+# Pricing Types
+# ─────────────────────────────────────────
+
+type Price {
+  amount: Float!
+  currency: Currency!
+  formatted: String!
+  includesTax: Boolean!
+  regionalPrices: [RegionPrice!]!
+}
+
+type LuxuryPrice {
+  amount: Float!
+  currency: Currency!
+  formatted: String!
+  priceSegment: PriceSegment!
+  msrp: Float
+  authenticatedBuyerPrice: Float
+  includesTax: Boolean!
+}
+
+enum PriceSegment {
+  ENTRY_LUXURY
+  MID_LUXURY
+  HIGH_LUXURY
+  ULTRA_HIGH_LUXURY
+  BESPOKE
+}
+
+type RegionPrice {
+  region: String!
+  countryCode: String!
+  currency: Currency!
+  amount: Float!
+  formatted: String!
+  includesTax: Boolean!
+  taxRate: Float
+}
+
+# ─────────────────────────────────────────
+# Availability Types
+# ─────────────────────────────────────────
+
+type Availability {
+  isAvailable: Boolean!
+  onlineAvailable: OnlineAvailable!
+  inStoreAvailable: InStoreAvailable!
+  leadTimeDays: Int
+  restockDate: DateTime
+  isLimitedStock: Boolean!
+  unitsRemaining: Int
+}
+
+type OnlineAvailable {
+  isAvailable: Boolean!
+  shipsTo: [String!]!
+  estimatedDeliveryDays: Int
+  expressDeliveryAvailable: Boolean!
+  clickAndCollectAvailable: Boolean!
+}
+
+type InStoreAvailable {
+  isAvailable: Boolean!
+  storesWithStock: [Store!]!
+  nearbyStores(latitude: Float!, longitude: Float!, radiusKm: Float): [Store!]!
+  reserveInStoreAvailable: Boolean!
+}
+
+# ─────────────────────────────────────────
+# Store and Boutique Types
+# ─────────────────────────────────────────
+
+type Store {
+  id: ID!
+  name: String!
+  brand: LVMHBrand!
+  storeType: StoreType!
+  address: BoutiqueAddress!
+  hours: BoutiqueHours!
+  details: BoutiqueDetails!
+  services: BoutiqueServices!
+  phone: String
+  email: String
+  website: URL
+  latitude: Float
+  longitude: Float
+}
+
+enum StoreType {
+  FLAGSHIP_BOUTIQUE
+  BOUTIQUE
+  OUTLET
+  DEPARTMENT_STORE_COUNTER
+  POP_UP
+  ONLINE_ONLY
+  HOTEL
+}
+
+type BoutiqueDetails {
+  id: ID!
+  store: Store!
+  floorArea: String
+  floors: Int
+  hasPrivateSalon: Boolean!
+  hasGallerySpace: Boolean!
+  hasRestaurant: Boolean!
+  hasBar: Boolean!
+  architectDesigner: String
+  openingYear: Int
+  renovationYear: Int
+  description: String
+  featuredArtwork: [String!]
+  images: [ProductImage!]!
+}
+
+type BoutiqueAddress {
+  street: String!
+  city: String!
+  state: String
+  postalCode: String!
+  country: String!
+  countryCode: String!
+  neighborhood: String
+  landmark: String
+  formattedAddress: String!
+}
+
+type BoutiqueHours {
+  monday: DayHours
+  tuesday: DayHours
+  wednesday: DayHours
+  thursday: DayHours
+  friday: DayHours
+  saturday: DayHours
+  sunday: DayHours
+  holidayHours: [HolidayHours!]
+  timezone: String!
+  isCurrentlyOpen: Boolean!
+}
+
+type DayHours {
+  open: String
+  close: String
+  isClosed: Boolean!
+}
+
+type HolidayHours {
+  date: DateTime!
+  open: String
+  close: String
+  isClosed: Boolean!
+  note: String
+}
+
+type BoutiqueServices {
+  appointmentService: AppointmentService!
+  vipService: VIPService!
+  personalShopper: Boolean!
+  alterations: Boolean!
+  monogramming: Boolean!
+  giftWrapping: Boolean!
+  taxRefund: Boolean!
+  concierge: Boolean!
+  parkingValidation: Boolean!
+  languages: [String!]!
+}
+
+type AppointmentService {
+  isAvailable: Boolean!
+  minimumLeadHours: Int
+  maximumAdvanceDays: Int
+  duration: Int
+  services: [AppointmentType!]!
+}
+
+enum AppointmentType {
+  PERSONAL_SHOPPING
+  WATCH_SERVICE
+  JEWELRY_CONSULTATION
+  FRAGRANCE_CONSULTATION
+  BESPOKE_ORDER
+  COLLECTION_PREVIEW
+  VIP_EVENT
+}
+
+type VIPService {
+  isAvailable: Boolean!
+  privateSalonAvailable: Boolean!
+  dedicatedAdvisor: Boolean!
+  afterHoursAccess: Boolean!
+  bespokeProgramAvailable: Boolean!
+  champagneService: Boolean!
+  giftConcierge: Boolean!
+}
+
+# ─────────────────────────────────────────
+# Customer and Loyalty Types
+# ─────────────────────────────────────────
+
+type Customer {
+  id: ID!
+  profile: CustomerProfile!
+  vipMembership: VIPMember
+  orders: [Order!]!
+  wishlist: [Product!]!
+  preferredBrands: [LVMHBrand!]!
+  preferredStores: [Store!]!
+  createdAt: DateTime!
+}
+
+type CustomerProfile {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  email: String!
+  phone: String
+  dateOfBirth: DateTime
+  gender: Gender
+  nationality: String
+  preferredLanguage: String!
+  preferredCurrency: Currency!
+  communicationPreferences: CommunicationPreferences!
+  shippingAddresses: [BoutiqueAddress!]!
+}
+
+type CommunicationPreferences {
+  emailMarketing: Boolean!
+  smsMarketing: Boolean!
+  newCollectionAlerts: Boolean!
+  eventInvitations: Boolean!
+  personalizedOffers: Boolean!
+}
+
+type VIPMember {
+  id: ID!
+  customer: Customer!
+  status: VIPStatus!
+  loyalty: Loyalty!
+  eliteService: EliteService
+  memberSince: DateTime!
+  anniversaryDate: DateTime
+  dedicatedAdvisor: String
+  preferredBoutique: Store
+}
+
+type VIPStatus {
+  tier: VIPTier!
+  tierName: String!
+  pointsBalance: Int!
+  pointsToNextTier: Int
+  tierExpiryDate: DateTime
+  benefits: [String!]!
+  globalRecognition: Boolean!
+}
+
+enum VIPTier {
+  PREFERRED
+  ELITE
+  ULTRA_ELITE
+  BESPOKE_CLIENT
+}
+
+type Loyalty {
+  id: ID!
+  programName: String!
+  pointsBalance: Int!
+  lifetimePoints: Int!
+  recentTransactions: [LoyaltyTransaction!]!
+  availableRewards: [LoyaltyReward!]!
+}
+
+type LoyaltyTransaction {
+  id: ID!
+  date: DateTime!
+  description: String!
+  pointsEarned: Int
+  pointsRedeemed: Int
+  orderId: String
+}
+
+type LoyaltyReward {
+  id: ID!
+  name: String!
+  description: String!
+  pointsCost: Int!
+  rewardType: RewardType!
+  isAvailable: Boolean!
+  expiryDate: DateTime
+}
+
+enum RewardType {
+  PRODUCT_GIFT
+  EXPERIENCE
+  SERVICE_UPGRADE
+  EVENT_ACCESS
+  DONATION
+}
+
+type EliteService {
+  dedicatedConcierge: Boolean!
+  globalPrivileges: Boolean!
+  exclusiveEventAccess: Boolean!
+  bespokeConsultations: Boolean!
+  priorityProduction: Boolean!
+  complimentaryAlterations: Boolean!
+  annualGiftBudget: Float
+  privateViewings: Boolean!
+}
+
+# ─────────────────────────────────────────
+# Order Types
+# ─────────────────────────────────────────
+
+type Order {
+  id: ID!
+  orderNumber: String!
+  customer: Customer!
+  details: OrderDetails!
+  status: OrderStatus!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type OrderDetails {
+  id: ID!
+  order: Order!
+  lineItems: [OrderLineItem!]!
+  subtotal: Price!
+  tax: Float!
+  shipping: Float!
+  total: Price!
+  shippingAddress: BoutiqueAddress!
+  billingAddress: BoutiqueAddress!
+  paymentMethod: String!
+  giftMessage: String
+  giftWrapping: Boolean!
+  trackingNumber: String
+  estimatedDelivery: DateTime
+  deliveredAt: DateTime
+}
+
+type OrderLineItem {
+  id: ID!
+  product: ProductDetails!
+  sku: SKU!
+  quantity: Int!
+  unitPrice: Price!
+  lineTotal: Price!
+  engraving: String
+  monogram: String
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  PROCESSING
+  SHIPPED
+  OUT_FOR_DELIVERY
+  DELIVERED
+  RETURN_REQUESTED
+  RETURNED
+  CANCELLED
+}
+
+# ─────────────────────────────────────────
+# Authentication Types
+# ─────────────────────────────────────────
+
+type APIKey {
+  id: ID!
+  key: String!
+  name: String!
+  description: String
+  brandAccess: [LVMHBrand!]!
+  scopes: [APIScope!]!
+  createdAt: DateTime!
+  expiresAt: DateTime
+  isActive: Boolean!
+  rateLimit: Int!
+  lastUsedAt: DateTime
+}
+
+enum APIScope {
+  PRODUCTS_READ
+  PRODUCTS_WRITE
+  ORDERS_READ
+  ORDERS_WRITE
+  CUSTOMERS_READ
+  CUSTOMERS_WRITE
+  STORES_READ
+  APPOINTMENTS_WRITE
+  INVENTORY_READ
+  ANALYTICS_READ
+}
+
+type Token {
+  accessToken: String!
+  refreshToken: String
+  tokenType: String!
+  expiresIn: Int!
+  scopes: [APIScope!]!
+  issuedAt: DateTime!
+}
+
+# ─────────────────────────────────────────
+# Connection / Pagination Types
+# ─────────────────────────────────────────
+
+type ProductConnection {
+  edges: [ProductEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type ProductEdge {
+  node: Product!
+  cursor: String!
+}
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+# ─────────────────────────────────────────
+# Root Types
+# ─────────────────────────────────────────
+
+type Query {
+  brand(id: ID, slug: String): LVMHBrand
+  brands(segment: BrandSegment): [LVMHBrand!]!
+  louisVuitton: LouisVuitton
+  christianDior: ChristianDior
+  givenchy: Givenchy
+  celine: Celine
+  loewe: Loewe
+  marcJacobs: MarcJacobs
+  fendi: Fendi
+  bulgari: Bulgari
+  tiffany: Tiffany
+  tagHeuer: TagHeuer
+  zenith: Zenith
+  hublot: Hublot
+  domPerignon: DomPerignon
+  moet: Moet
+  chandon: Chandon
+  hennessy: Hennessy
+
+  product(id: ID!): ProductDetails
+  products(
+    brandId: ID
+    categoryId: ID
+    collectionId: ID
+    minPrice: Float
+    maxPrice: Float
+    currency: Currency
+    first: Int
+    after: String
+  ): ProductConnection!
+
+  productCategory(id: ID, slug: String): ProductCategory
+  productCategories(segment: BrandSegment): [ProductCategory!]!
+
+  collection(id: ID, slug: String): ProductCollection
+  collections(brandId: ID, season: String, year: Int): [ProductCollection!]!
+  limitedEditions(brandId: ID): [LimitedEdition!]!
+
+  store(id: ID!): Store
+  stores(brandId: ID, country: String, city: String, storeType: StoreType): [Store!]!
+  nearbyStores(latitude: Float!, longitude: Float!, radiusKm: Float, brandId: ID): [Store!]!
+
+  customer(id: ID!): Customer
+  myProfile: Customer
+
+  order(id: ID!): Order
+  myOrders: [Order!]!
+
+  apiKey(id: ID!): APIKey
+  myApiKeys: [APIKey!]!
+}
+
+type Mutation {
+  createAppointment(
+    storeId: ID!
+    appointmentType: AppointmentType!
+    preferredDate: DateTime!
+    notes: String
+  ): AppointmentConfirmation!
+
+  cancelAppointment(appointmentId: ID!): Boolean!
+
+  addToWishlist(productId: ID!): Customer!
+  removeFromWishlist(productId: ID!): Customer!
+
+  updateCommunicationPreferences(
+    emailMarketing: Boolean
+    smsMarketing: Boolean
+    newCollectionAlerts: Boolean
+    eventInvitations: Boolean
+    personalizedOffers: Boolean
+  ): CustomerProfile!
+
+  createAPIKey(
+    name: String!
+    description: String
+    brandAccess: [ID!]!
+    scopes: [APIScope!]!
+  ): APIKey!
+
+  revokeAPIKey(id: ID!): Boolean!
+
+  refreshToken(refreshToken: String!): Token!
+}
+
+type AppointmentConfirmation {
+  id: ID!
+  store: Store!
+  appointmentType: AppointmentType!
+  confirmedDate: DateTime!
+  advisorName: String
+  confirmationNumber: String!
+  notes: String
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+}

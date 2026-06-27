@@ -46,7 +46,7 @@ common:
   url: https://www.lvmh.com/en/news-documents/lvmh-innovation
 - type: BlockchainConsortium
   url: https://auraconsortium.com/
-- type: LLMsTxt
+- type: LlmsText
   url: https://www.lvmh.com/llms.txt
 - url: graphql/lvmh-graphql.md
   type: GraphQL

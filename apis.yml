@@ -10,7 +10,18 @@ description: LVMH Moët Hennessy Louis Vuitton is the world's largest luxury goo
   integrations are handled brand-by-brand and through closed innovation partnerships
   such as the Aura Blockchain Consortium.
 kind: company
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: unknown
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Unknown
+  confidence: low
+  source: []
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/lvmh.png
 tags:
 - Cosmetics
 - Fashion

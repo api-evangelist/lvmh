@@ -74,8 +74,6 @@ common:
   url: https://auraconsortium.com/
 - type: LlmsText
   url: https://www.lvmh.com/llms.txt
-- url: graphql/lvmh-graphql.md
-  type: GraphQL
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

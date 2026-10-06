@@ -42,10 +42,12 @@ tags:
 - Wine and Spirits
 url: https://raw.githubusercontent.com/api-evangelist/lvmh/refs/heads/main/apis.yml
 created: '2026-05-05'
-modified: '2026-05-16'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 apis: []
 common:
+- url: https://www.lvmh.com/en/press
+  type: Blog
 - type: VulnerabilityDisclosure
   url: security/lvmh-vulnerability-disclosure.yml
 - type: DomainSecurity
